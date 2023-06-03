@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { getData } from '../services/marvel';
+import { getData } from '../../services/marvel';
+import {Link} from "react-router-dom";
 
-const Allheroes = () => {
+const AllHeros = () => {
     const [heroes, setHeroes] = useState([]);
     const [offset, setOffset] = useState(0); // begin met de eerste pagina
     const limit = 20; // het aantal resultaten per pagina
@@ -25,18 +26,21 @@ const Allheroes = () => {
     };
 
     return (
-        <div>
+        <ul>
             {heroes.map(hero => (
-                <div key={hero.id}>
-                    <h2>{hero.name}</h2>
-                    <img src={hero.thumbnail.path + '.' + hero.thumbnail.extension} alt={hero.name} />
-                </div>
+                <li key={hero.id}>
+                    <Link to={`/hero/${hero.id}`}>
+                        <h2>{hero.name}</h2>
+                    </Link>
+                    <img src={`${hero.thumbnail.path}.${hero.thumbnail.extension}`} alt={hero.name} />
+                </li>
             ))}
             <button onClick={handlePreviousPage}>Vorige pagina</button>
             <button onClick={handleNextPage}>Volgende pagina</button>
-        </div>
+        </ul>
     );
-};
+}
+export default AllHeros;
 
-export default Allheroes;
+
 
