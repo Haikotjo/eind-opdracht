@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {getTitleById} from "../../services/GetData";
 import {Link, useParams} from 'react-router-dom';
-import HeroCard from '../../components/HeroCard';
+import HeroCardById from '../../components/HeroCardById';
 
 function ComicPage() {
     const { id } = useParams(); // haal `id` uit de route parameters
@@ -62,10 +62,7 @@ function ComicPage() {
                             <li
                                 key={index}
                             >
-                                <HeroCard
-                                    name={character.name}
-                                    resourceURI={character.resourceURI}
-                                />
+                                <HeroCardById id={character.resourceURI.split('/').pop()} />
                             </li>
                         ))}
                     </ul>

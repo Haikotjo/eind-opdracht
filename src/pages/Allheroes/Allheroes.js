@@ -34,9 +34,7 @@ const AllHeros = () => {
         <ul>
             {heroes.map(hero => (
                 <li key={hero.id}>
-                    <Link to={hero.id}>
-                        <HeroCard hero={hero} />
-                    </Link>
+                    <HeroCard hero={hero} />
                 </li>
             ))}
             <button onClick={handlePreviousPage}>Vorige pagina</button>
