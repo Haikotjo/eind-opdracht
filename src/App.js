@@ -5,8 +5,8 @@ import Home from './pages/Home';
 import Navigation from './components/Navigation';
 import AllHeros from "./pages/Allheroes/Allheroes";
 import AllComics from "./pages/AllComics/Allcomics";
-import HeroCard from "./components/HeroCard";
-import ComicCard from "./components/ComicCard";
+import HeroPage from "./pages/HeroPage/HeroPage";
+import ComicPage from "./pages/ComicPage/ComicPage";
 // import Superhero from "./pages/Superhero";
 
 function App() {
@@ -20,8 +20,8 @@ function App() {
                 <Routes>
                     <Route path="/AllHeros" element={<AllHeros />} />
                     <Route path="/AllComics" element={<AllComics />} />
-                    <Route path="/hero/:id" element={<HeroCard />} />
-                    <Route path="/comic/:id" element={<ComicCard />} />
+                    <Route path="/hero/:id" element={<HeroPage />} />
+                    <Route path="/comic/:id" element={<ComicPage />} />
                     <Route path="/" element={<Home />} />
                 </Routes>
             </Router>

@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {getTitleById} from "../services/marvel";
-import {Link, useParams} from 'react-router-dom'; // importeer de useParams hook
+import {getTitleById} from "../../services/GetData";
+import {Link, useParams} from 'react-router-dom';
+import HeroCard from '../../components/HeroCard';
 
-function ComicCard() {
+function ComicPage() {
     const { id } = useParams(); // haal `id` uit de route parameters
     const [comic, setComic] = useState(null);
 
@@ -59,8 +60,12 @@ function ComicCard() {
                     <ul>
                         {comic.characters.items.map((character, index) => (
                             <li
-                                key={index}>
-                                {character.name}
+                                key={index}
+                            >
+                                <HeroCard
+                                    name={character.name}
+                                    resourceURI={character.resourceURI}
+                                />
                             </li>
                         ))}
                     </ul>
@@ -70,4 +75,4 @@ function ComicCard() {
     );
 }
 
-export default ComicCard;
+export default ComicPage;

@@ -31,7 +31,7 @@ export function getData(endpoint, queryParam, queryValue, limit = 20, offset = 0
 
     return axios.get(`${BASE_URL}${endpoint}`, { params });
 }
-export function getCharacterById(id) {
+export function getCharacterById(id,) {
     const timeStamp = Date.now();
     const hash = createHash(timeStamp);
 
@@ -41,6 +41,20 @@ export function getCharacterById(id) {
         hash: hash,
     };
     return axios.get(`${BASE_URL}characters/${id}`, { params });
+}
+
+export function getCharacterComics(characterId, limit = 20, offset = 0) {
+    const timeStamp = Date.now();
+    const hash = createHash(timeStamp);
+
+    let params = {
+        ts: timeStamp,
+        apikey: publicKey,
+        hash: hash,
+        limit: limit,
+        offset: offset
+    };
+    return axios.get(`${BASE_URL}characters/${characterId}/comics`, { params });
 }
 
 export function getTitleById(id) {

@@ -1,32 +1,29 @@
-import React, {useEffect, useState} from 'react';
-import {getCharacterById} from "../services/marvel"; // deze functie moet je nog maken
-import {useParams} from 'react-router-dom'; // importeer de useParams hook
+import React from 'react';
+import {Link} from 'react-router-dom';
 
-function HeroCard() {
-    const { id } = useParams(); // haal `id` uit de route parameters
-    const [hero, setHero] = useState(null);
-
-    useEffect(() => {
-        getCharacterById(id)
-            .then(response => {
-                setHero(response.data.data.results[0]); // zet het opgehaalde karakter in de state
-            })
-            .catch(error => {
-                console.error('Er ging iets mis bij het ophalen van de superheld:', error);
-            });
-    }, [id]); // voer uit wanneer `id` verandert
-
-    // toon een laadindicator wanneer het karakter nog niet is opgehaald
-    if (!hero) {
-        return <div>Loading...</div>;
+function HeroCard({hero, name, resourceURI}) {
+    // Als `hero` prop is gegeven, gebruik die informatie
+    if (hero) {
+        return (
+            <Link to={`/hero/${hero.id}`}>
+                <div className="hero-card">
+                    <h2>{hero.name}</h2>
+                    <p>{hero.description}</p>
+                    <img src={`${hero.thumbnail.path}.${hero.thumbnail.extension}`} alt={hero.name} />
+                </div>
+            </Link>
+        );
     }
 
-    // toon het karakter wanneer het is opgehaald
+    // Als `hero` prop niet gegeven is, gebruik dan de `name` en `resourceURI` props
     return (
-        <div>
-            <h2>{hero.name}</h2>
-            <img src={`${hero.thumbnail.path}.${hero.thumbnail.extension}`} alt={hero.name} />
-        </div>
+        <Link to={`/hero/${resourceURI.split('/').pop()}`}>
+            <div className="hero-card">
+                <h2>
+                    {name}
+                </h2>
+            </div>
+        </Link>
     );
 }
 
